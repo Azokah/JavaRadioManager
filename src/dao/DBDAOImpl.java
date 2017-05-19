@@ -4,151 +4,346 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
-import dbclases.Auspiciante;
+import dbclases.Programa;
 import dbmanager.DBManager;
 import exceptions.RadioException;
 
-public class DBDAOImpl implements AuspicianteDAO{
+/*
+ * TEMPORAL
+ */
 
-	@Override
-	public void nuevoAuspiciante(Auspiciante auspiciante) throws RadioException {
-		// TODO Auto-generated method stub
-		String sql = "INSERT INTO auspiciantes (nombre, sueldo) VALUES ('"
-				+ auspiciante.getNombre()
-				+ "','"
-				+ auspiciante.getSaldo()
-				+ "')";
-		Connection c = DBManager.getInstance().connect();
-		try {
-			Statement s = c.createStatement();
-			s.executeUpdate(sql);
-			c.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
+public class DBDAOImpl implements DBDAO {
+
+	public void crearTablaProgramas() {
+
+		try{
+
+			Connection c = DBManager.getInstance().connect();
+
+			String sql = "CREATE TABLE programas ( id INTEGER IDENTITY, nombre VARCHAR(256), horario VARCHAR(256), conductor VARCHAR(256), productor VARCHAR(256), auspiciante VARCHAR(256))";
+
 			try {
-				c.rollback();
-			} catch (SQLException e1) {
+				Statement s = c.createStatement();
+				s.execute(sql);
+			} catch (SQLException e) {
+				try {
+					c.rollback();
+					e.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} finally {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
-			throw new RadioException("Error al crear el auspiciante", e);
-		} finally {
-			try {
-				c.close();
-			} catch (SQLException e1) {
-			}
+		}catch(RadioException a)
+		{
+			System.out.println(a); //Imprime mensaje en consola: No hay conexion
 		}
+
 	}
 
-	@Override
-	public void borrarAuspiciante(Auspiciante auspiciante) throws RadioException{
-		// TODO Auto-generated method stub
-		String sql = "DELETE FROM auspiciantes WHERE nombre = '" + auspiciante.getNombre() + "'";
-		Connection c = DBManager.getInstance().connect();
-		try {
-			Statement s = c.createStatement();
-			s.executeUpdate(sql);
-			c.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public void dropTablaProgramas() {
+
+		try
+		{
+
+
+			Connection c = DBManager.getInstance().connect();
+
+			String sql = "DROP TABLE programas";
+
 			try {
-				c.rollback();
-			} catch (SQLException e1) {
+				Statement s = c.createStatement();
+				s.execute(sql);
+				c.commit();
+			} catch (SQLException e) {
+				try {
+					c.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} finally {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
-			throw new RadioException("Error al borrar el auspiciante", e);
-		} finally {
-			try {
-				c.close();
-			} catch (SQLException e1) {
-			}
+		}catch(RadioException a){
+
+			System.out.println(a); //Imprime mensaje en consola: No hay conexion
 		}
+
 	}
 
-	@Override
-	public void modificarAuspiciante(Auspiciante auspiciante) throws RadioException{
-		// TODO Auto-generated method stub
-		String sql = "UPDATE auspiciantes set sueldo = '" + auspiciante.getSaldo() + "' WHERE nombre = '" + auspiciante.getNombre() + "'";
-		Connection c = DBManager.getInstance().connect();
-		try {
-			Statement s = c.createStatement();
-			s.executeUpdate(sql);
-			c.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
+
+	public void crearTablaConductor() {
+
+		try{
+
+			Connection c = DBManager.getInstance().connect();
+
+			String sql = "CREATE TABLE conductores ( id INTEGER IDENTITY, nombre VARCHAR(256), sueldo FLOAT)";
+
 			try {
-				c.rollback();
-			} catch (SQLException e1) {
+				Statement s = c.createStatement();
+				s.execute(sql);
+			} catch (SQLException e) {
+				try {
+					c.rollback();
+					e.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} finally {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
-			throw new RadioException("Error al modificar el auspiciante", e);
-		} finally {
-			try {
-				c.close();
-			} catch (SQLException e1) {
-			}
+		}catch(RadioException a)
+		{
+			System.out.println(a); //Imprime mensaje en consola: No hay conexion
 		}
+
 	}
 
-	@Override
-	public Auspiciante mostrarAuspiciante(Auspiciante auspiciante) throws RadioException {
-		// TODO Auto-generated method stub
-		String sql = "SELECT * FROM auspiciantes WHERE nombre = '" + auspiciante.getNombre() + "'";
-		Connection c = DBManager.getInstance().connect();
-		try {
-			Statement s = c.createStatement();
-			ResultSet rs = s.executeQuery(sql);
+	public void dropTablaConductor() {
 
-			if(rs.next()) { 
-				System.out.println("Auspiciante:");
-				System.out.print("\t ID:" + rs.getInt("id")+"\n");
-				System.out.print("\t Nombre:" + rs.getString("nombre")+"\n");
-				System.out.print("\t Sueldo:" + rs.getString("Sueldo")+"\n");
-				System.out.println();
-			}
+		try
+		{
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+
+			Connection c = DBManager.getInstance().connect();
+
+			String sql = "DROP TABLE conductores";
+
 			try {
-				c.rollback();
-			} catch (SQLException e1) {
+				Statement s = c.createStatement();
+				s.execute(sql);
+				c.commit();
+			} catch (SQLException e) {
+				try {
+					c.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} finally {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
-			throw new RadioException("Error al mostrar el auspiciante", e);
-		} finally {
-			try {
-				c.close();
-			} catch (SQLException e1) {
-			}
+		}catch(RadioException a){
+
+			System.out.println(a); //Imprime mensaje en consola: No hay conexion
 		}
-		return null;
+
 	}
 
-	@Override
-	public List<Auspiciante> mostrarTodosAuspiciante() throws RadioException{
-		// TODO Auto-generated method stub
-		List<Auspiciante> listaAus = new ArrayList<Auspiciante>();
-		String sql = "SELECT * FROM auspiciantes";
-		Connection c = DBManager.getInstance().connect();
-		try {
-			Statement s = c.createStatement();
-			ResultSet rs = s.executeQuery(sql);
+	public void crearTablaProductores() {
 
-			while(rs.next()) {
-				listaAus.add(new Auspiciante(rs.getString("nombre"),rs.getFloat("Sueldo")));
+		try{
 
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+			Connection c = DBManager.getInstance().connect();
+
+			String sql = "CREATE TABLE productores ( id INTEGER IDENTITY, nombre VARCHAR(256), sueldo FLOAT)";
+
 			try {
-				c.rollback();
-			} catch (SQLException e1) {
+				Statement s = c.createStatement();
+				s.execute(sql);
+			} catch (SQLException e) {
+				try {
+					c.rollback();
+					e.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} finally {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
-			throw new RadioException("Error al mostrar el auspiciante", e);
-		} finally {
-			try {
-				c.close();
-			} catch (SQLException e1) {
-			}
+		}catch(RadioException a)
+		{
+			System.out.println(a); //Imprime mensaje en consola: No hay conexion
 		}
-		return listaAus;
-	}	
+
+	}
+
+	public void dropTablaProductores() {
+
+		try
+		{
+
+
+			Connection c = DBManager.getInstance().connect();
+
+			String sql = "DROP TABLE productores";
+
+			try {
+				Statement s = c.createStatement();
+				s.execute(sql);
+				c.commit();
+			} catch (SQLException e) {
+				try {
+					c.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} finally {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}catch(RadioException a){
+
+			System.out.println(a); //Imprime mensaje en consola: No hay conexion
+		}
+
+	}
+
+	public void crearTablaAuspiciantes() {
+
+		try{
+
+			Connection c = DBManager.getInstance().connect();
+
+			String sql = "CREATE TABLE auspiciantes ( id INTEGER IDENTITY, nombre VARCHAR(256), sueldo FLOAT)";
+
+			try {
+				Statement s = c.createStatement();
+				s.execute(sql);
+			} catch (SQLException e) {
+				try {
+					c.rollback();
+					e.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} finally {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}catch(RadioException a)
+		{
+			System.out.println(a); //Imprime mensaje en consola: No hay conexion
+		}
+
+	}
+
+	public void dropTablaAuspiciantes() {
+
+		try
+		{
+
+
+			Connection c = DBManager.getInstance().connect();
+
+			String sql = "DROP TABLE auspiciantes";
+
+			try {
+				Statement s = c.createStatement();
+				s.execute(sql);
+				c.commit();
+			} catch (SQLException e) {
+				try {
+					c.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} finally {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}catch(RadioException a){
+
+			System.out.println(a); //Imprime mensaje en consola: No hay conexion
+		}
+
+	}
+
+	public void crearTablaUsuarios() {
+
+		try{
+
+			Connection c = DBManager.getInstance().connect();
+
+			String sql = "CREATE TABLE usuarios ( id INTEGER IDENTITY, usuario VARCHAR(256), pass VARCHAR(256))";
+
+			try {
+				Statement s = c.createStatement();
+				s.execute(sql);
+			} catch (SQLException e) {
+				try {
+					c.rollback();
+					e.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} finally {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}catch(RadioException a)
+		{
+			System.out.println(a); //Imprime mensaje en consola: No hay conexion
+		}
+
+	}
+
+	public void dropTablaUsuarios() {
+
+		try
+		{
+
+
+			Connection c = DBManager.getInstance().connect();
+
+			String sql = "DROP TABLE usuarios";
+
+			try {
+				Statement s = c.createStatement();
+				s.execute(sql);
+				c.commit();
+			} catch (SQLException e) {
+				try {
+					c.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} finally {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}catch(RadioException a){
+
+			System.out.println(a); //Imprime mensaje en consola: No hay conexion
+		}
+
+	}
 }
+

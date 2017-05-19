@@ -11,6 +11,7 @@ import constantes.Constantes;
 import dao.AuspicianteDAO;
 import dao.AuspicianteDAOImpl;
 import dao.ConductorDAOImpl;
+import dao.DBDAOImpl;
 import dao.ProductorDAOImpl;
 import dao.ProgramasDaoImpl;
 import dbclases.Auspiciante;
@@ -26,6 +27,7 @@ import login.UsuarioBO;
 import login.UsuarioDAOImpl;
 import negocio.AuspicianteBO;
 import negocio.ConductorBO;
+import negocio.DBBO;
 import negocio.ProductorBO;
 import negocio.ProgramaBO;
 import paneles.PanelBase;
@@ -66,10 +68,13 @@ public class MiHandler implements Constantes{
 	private AuspicianteBO ausBO;
 	private ConductorBO conBO;
 	private ProductorBO proBO;
+	private DBBO dbBO;
 	//private PanelBase pB;
 	//private PanelPrincipal pP;
 
 	public MiHandler() {
+		dbBO = new DBBO();
+		dbBO.setDBDAO(new DBDAOImpl());
 		usrBO = new UsuarioBO();
 		usrBO.setUsuarioDAO(new UsuarioDAOImpl());
 		pgmBO = new ProgramaBO();
@@ -112,7 +117,30 @@ public class MiHandler implements Constantes{
 	public void salir(){
 		System.exit(0);
 	}
-
+	
+	public void crearTablas(){
+		try {
+		dbBO.crearTablaProgramas();
+		dbBO.crearTablaConductor();
+		dbBO.crearTablaAuspiciantes();
+		dbBO.crearTablaUsuarios();
+		dbBO.crearTablaProductores();
+		} catch (RadioException e){
+			JOptionPane.showMessageDialog(null,"Error, las tablas no pudieron ser creadas.", e.getMessage(),JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	public void dropTablas(){
+		try{
+			dbBO.dropTablaProgramas();
+			dbBO.dropTablaAuspiciantes();
+			dbBO.dropTablaConductor();
+			dbBO.dropTablaUsuarios();
+			dbBO.dropTablaProductores();
+		} catch (RadioException e){
+			JOptionPane.showMessageDialog(null,"Error, no se pudieron dropear las tablas.", e.getMessage(),JOptionPane.ERROR_MESSAGE);
+		}
+	}
 	public void agregarProgramas(Programa pgm)
 	{
 		try {

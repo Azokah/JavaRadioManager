@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import dbclases.Productor;
 import dbclases.Programa;
 
 public class TableModelPrograma extends AbstractTableModel { 
@@ -24,7 +25,9 @@ public class TableModelPrograma extends AbstractTableModel {
 	public Programa getEntidad(int fila)
 	{
 		if(fila != -1) return programas.get(fila);
-		else return null;
+		else return (new Programa("Seleccione un Programa.","Seleccione un programa."
+				,"Seleccione un programa.","Seleccione un programa.","Seleccione un programa.")); //QUICKFIX 26/05/17
+		//else return null;
 	}
 	
 	@Override

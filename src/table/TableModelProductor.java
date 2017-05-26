@@ -22,7 +22,8 @@ public class TableModelProductor extends AbstractTableModel {
 	public Productor getEntidad(int fila)
 	{
 		if(fila != -1) return productor.get(fila);
-		else return null;
+		else return (new Productor("Seleccione un Productor.",0)); //QuickFix 26/05/17
+		//else return null;
 	}
 	
 	@Override

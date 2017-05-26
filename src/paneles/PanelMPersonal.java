@@ -17,7 +17,7 @@ public class PanelMPersonal extends PanelMenu implements Constantes{
 		this.handler = handler;
 		setAlignmentX(CENTER_ALIGNMENT);
 		setAlignmentY(CENTER_ALIGNMENT);
-		
+
 		add(UIHelper.getInstance().botonNuevo("Agregar Conductor",new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)

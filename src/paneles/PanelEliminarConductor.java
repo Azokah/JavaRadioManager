@@ -18,13 +18,13 @@ public class PanelEliminarConductor extends JPanel {
 
 	private JTextField nombreJTF;
 	private MiHandler handler;
-	
+
 	public PanelEliminarConductor(MiHandler handler,String nombreProgramaAEditar) {
 		
 		nombreJTF = new JTextField();
-		nombreJTF.setText(nombreProgramaAEditar);
+		nombreJTF.setText(nombreProgramaAEditar); // Puede ser null
 		nombreJTF.setEditable(false);
-		
+
 		setBackground(new Color(80,80,80));
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		add(UIHelper.getInstance().labelNuevo("Eliminar Conductor",100,255,200));
@@ -47,7 +47,7 @@ public class PanelEliminarConductor extends JPanel {
 					Conductor con = new Conductor(nombreJTF.getText(),0);
 					handler.eliminarConductor(con);
 					handler.cambiarPanelVolver();
-					
+
 				}
 			}
 		}));
@@ -60,5 +60,4 @@ public class PanelEliminarConductor extends JPanel {
 			}
 		}));
 	}
-
 }

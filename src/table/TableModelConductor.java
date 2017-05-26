@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import dbclases.Conductor;
+import dbclases.Productor;
 import dbclases.Programa;
 
 public class TableModelConductor extends AbstractTableModel { 
@@ -22,7 +23,8 @@ public class TableModelConductor extends AbstractTableModel {
 	public Conductor getEntidad(int fila)
 	{
 		if(fila != -1) return conductor.get(fila);
-		else return null;
+		else return (new Conductor("Seleccione un Conductor.",0));//QUICKFIX 26/05/17
+		//else return null;
 	}
 	
 	@Override

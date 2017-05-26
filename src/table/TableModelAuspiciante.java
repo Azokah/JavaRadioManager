@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import dbclases.Auspiciante;
+import dbclases.Productor;
 import dbclases.Programa;
 
 public class TableModelAuspiciante extends AbstractTableModel { 
@@ -22,7 +23,8 @@ public class TableModelAuspiciante extends AbstractTableModel {
 	public Auspiciante getEntidad(int fila)
 	{
 		if(fila != -1) return auspiciante.get(fila);
-		else return null;
+		else return (new Auspiciante("Seleccione un Auspiciante.",0));//QUICKFIX 26/05/17
+		//else return null;
 	}
 	
 	@Override

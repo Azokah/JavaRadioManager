@@ -52,7 +52,7 @@ public class PanelFirma extends JPanel implements Constantes{
 			public void actionPerformed(ActionEvent e)
 			{
 				//evento
-				JOptionPane.showMessageDialog(null, "Creado por Jaime Gonzalez Bonorino.\n Trabajo Practico de Laboratorio 1.\n 07/07/2016", "Sistema de Radio.", JOptionPane.INFORMATION_MESSAGE,UIHelper.getInstance().cargarIcono("Fo4_GNN_logo2.png"));
+				JOptionPane.showMessageDialog(null, "Creado por Jaime Gonzalez Bonorino.\n Trabajo Practico de Laboratorio 1.\n 23/05/2017", "Sistema de Radio.", JOptionPane.INFORMATION_MESSAGE,UIHelper.getInstance().cargarIcono("Fo4_GNN_logo2.png"));
 			}
 		}));
 		add(UIHelper.getInstance().botonNuevo("Salir",new ActionListener()

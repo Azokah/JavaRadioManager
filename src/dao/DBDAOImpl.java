@@ -33,6 +33,7 @@ public class DBDAOImpl implements DBDAO {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+				throw new RadioException("No hay conexion con la DB.", e);
 			} finally {
 				try {
 					c.close();
@@ -67,6 +68,7 @@ public class DBDAOImpl implements DBDAO {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+				throw new RadioException("No hay conexion con la DB.", e);
 			} finally {
 				try {
 					c.close();
@@ -100,6 +102,7 @@ public class DBDAOImpl implements DBDAO {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+				throw new RadioException("No hay conexion con la DB.", e);
 			} finally {
 				try {
 					c.close();
@@ -134,6 +137,7 @@ public class DBDAOImpl implements DBDAO {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+				throw new RadioException("No hay conexion con la DB.", e);
 			} finally {
 				try {
 					c.close();
@@ -166,6 +170,7 @@ public class DBDAOImpl implements DBDAO {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+				throw new RadioException("No hay conexion con la DB.", e);
 			} finally {
 				try {
 					c.close();
@@ -200,6 +205,7 @@ public class DBDAOImpl implements DBDAO {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+				throw new RadioException("No hay conexion con la DB.", e);
 			} finally {
 				try {
 					c.close();
@@ -232,6 +238,7 @@ public class DBDAOImpl implements DBDAO {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+				throw new RadioException("No hay conexion con la DB.", e);
 			} finally {
 				try {
 					c.close();
@@ -266,6 +273,7 @@ public class DBDAOImpl implements DBDAO {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+				throw new RadioException("No hay conexion con la DB.", e);
 			} finally {
 				try {
 					c.close();
@@ -298,6 +306,7 @@ public class DBDAOImpl implements DBDAO {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+				throw new RadioException("No hay conexion con la DB.", e);
 			} finally {
 				try {
 					c.close();
@@ -332,6 +341,7 @@ public class DBDAOImpl implements DBDAO {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+				throw new RadioException("No hay conexion con la DB.", e);
 			} finally {
 				try {
 					c.close();

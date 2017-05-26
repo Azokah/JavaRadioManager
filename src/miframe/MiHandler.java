@@ -114,22 +114,34 @@ public class MiHandler implements Constantes{
 		frame = new MiFrame("Galaxy News Radio (GNR).", this);
 	}
 
+	private String testText(String txt){
+		//QUICKFIX 26/05/17
+		if((txt == "Seleccione un Programa.") ||
+			(txt == "Seleccione un Productor.") ||
+			(txt == "Seleccione un Conductor.") ||
+			(txt == "Seleccione un Auspiciante.")){
+			JOptionPane.showMessageDialog(null,"Error, no ha seleccionado nada de la tabla.", "Error al ejecutar accion.",JOptionPane.ERROR_MESSAGE);
+		}
+
+		return txt;
+	}
+
 	public void salir(){
 		System.exit(0);
 	}
-	
+
 	public void crearTablas(){
 		try {
-		dbBO.crearTablaProgramas();
-		dbBO.crearTablaConductor();
-		dbBO.crearTablaAuspiciantes();
-		dbBO.crearTablaUsuarios();
-		dbBO.crearTablaProductores();
+			dbBO.crearTablaProgramas();
+			dbBO.crearTablaConductor();
+			dbBO.crearTablaAuspiciantes();
+			dbBO.crearTablaUsuarios();
+			dbBO.crearTablaProductores();
 		} catch (RadioException e){
 			JOptionPane.showMessageDialog(null,"Error, las tablas no pudieron ser creadas.", e.getMessage(),JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	public void dropTablas(){
 		try{
 			dbBO.dropTablaProgramas();
@@ -332,7 +344,7 @@ public class MiHandler implements Constantes{
 		}
 		return balance;
 	};
-	
+
 	public void cambiarPanelVolver() 
 	{
 		PanelBase pB = new PanelBaseFull(this);
@@ -341,6 +353,7 @@ public class MiHandler implements Constantes{
 
 	public void cambiarPanel(int panel)
 	{
+		//VARIOS QUICKFIXES 26/05/17
 		PanelBase pB;
 		PanelPrincipal pP = new PanelPrincipalPrograma(this);
 		pP.removeAll();
@@ -351,12 +364,12 @@ public class MiHandler implements Constantes{
 			pB = new PanelBasePrograma(this,pP);
 			break;
 		case EDITAR_PROGRAMA:
-			
-			pP.add(new PanelEditarPrograma(this,frame.getProgramaSelec().getNombre()));
+
+			pP.add(new PanelEditarPrograma(this,testText(frame.getProgramaSelec().getNombre())));
 			pB = new PanelBasePrograma(this,pP);
 			break;
 		case BORRAR_PROGRAMA:
-			pP.add(new PanelBorrarPrograma(this,frame.getProgramaSelec().getNombre()),BorderLayout.CENTER);
+			pP.add(new PanelBorrarPrograma(this,testText(frame.getProgramaSelec().getNombre())),BorderLayout.CENTER);
 			pB = new PanelBasePrograma(this,pP);
 			break;
 		case AGREGAR_CONDUCTOR:
@@ -364,11 +377,11 @@ public class MiHandler implements Constantes{
 			pB = new PanelBasePersonal(this,pP);
 			break;
 		case EDITAR_CONDUCTOR:
-			pP.add(new PanelEditarConductor(this,frame.getConductorSelec().getNombre()),BorderLayout.CENTER);
+			pP.add(new PanelEditarConductor(this,testText(frame.getConductorSelec().getNombre())),BorderLayout.CENTER);
 			pB = new PanelBasePersonal(this,pP);
 			break;
 		case BORRAR_CONDUCTOR:
-			pP.add(new PanelEliminarConductor(this,frame.getConductorSelec().getNombre()));
+			pP.add(new PanelEliminarConductor(this,testText(frame.getConductorSelec().getNombre())));
 			pB = new PanelBasePersonal(this,pP);;
 			break;
 		case AGREGAR_PRODUCTOR:
@@ -376,11 +389,11 @@ public class MiHandler implements Constantes{
 			pB = new PanelBasePersonal(this,pP);
 			break;
 		case EDITAR_PRODUCTOR:
-			pP.add(new PanelEditarProductor(this,frame.getProductorSelec().getNombre()),BorderLayout.CENTER);
+			pP.add(new PanelEditarProductor(this,testText(frame.getProductorSelec().getNombre())),BorderLayout.CENTER);
 			pB = new PanelBasePersonal(this,pP);
 			break;
 		case BORRAR_PRODUCTOR:
-			pP.add(new PanelEliminarProductor(this,frame.getProductorSelec().getNombre()),BorderLayout.CENTER);
+			pP.add(new PanelEliminarProductor(this,testText(frame.getProductorSelec().getNombre())),BorderLayout.CENTER);
 			pB = new PanelBasePersonal(this,pP);
 			break;
 		case AGREGAR_AUSPICIANTE:
@@ -388,11 +401,11 @@ public class MiHandler implements Constantes{
 			pB = new PanelBasePersonal(this,pP);
 			break;
 		case EDITAR_AUSPICIANTE:
-			pP.add(new PanelEditarAuspiciante(this,frame.getAuspicianteSelec().getNombre()),BorderLayout.CENTER);
+			pP.add(new PanelEditarAuspiciante(this,testText(frame.getAuspicianteSelec().getNombre())),BorderLayout.CENTER);
 			pB = new PanelBasePersonal(this,pP);
 			break;
 		case  BORRAR_AUSPICIANTE:
-			pP.add(new PanelEliminarAuspiciante(this,frame.getAuspicianteSelec().getNombre()),BorderLayout.CENTER);
+			pP.add(new PanelEliminarAuspiciante(this,testText(frame.getAuspicianteSelec().getNombre())),BorderLayout.CENTER);
 			pB = new PanelBasePersonal(this,pP);
 			break;
 
